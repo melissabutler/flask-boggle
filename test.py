@@ -26,6 +26,19 @@ class FlaskTests(TestCase):
             self.assertIsNone(session.get("highscore"))
             self.assertIsNone(session.get("nplays"))
 
+    def test_session_info_set(self):
+        """ Test session count in nplays"""
+        with app.test_client() as client:
+            with client.session_transaction() as change_session:
+                change_session['nplays'] = 999
+
+                response = client.get('/')
+                
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(session['nplays'], 1000)
+
+
+
 # Check word responses, valid/invalid/nan
     def test_check_valid_word(self):
         with app.test_client as client:
