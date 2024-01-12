@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> Let's Play Boggle! </h1>
+<!-- BOARD -->
+<section id="boggle">
+    
+    <p class="timer"></p>
+
+    <table class="board">
+        <tbody>
+        {% for row in board %}
+            <tr>
+            {% for letter in row %}
+                <td>{{letter}}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<!-- SUBMIT GUESS -->
+    <form name="add-word"  class="add-word" method="POST">
+        <input type="text" class="word" placeholder="Enter your guess">
+        <button>Submit</button>
+    </form>
+<!-- SHOW SCORE -->
+<p class="score"></p>
+<p class="high-score"></p>
+<h2>In {{ nplays}} games, your highscore is {{ highscore }}</h2>
+<button class="replay hidden">Play again?</button>
+<!-- SHOW MESSAGES -->
+<p class="messages hidden"></p>
+
+<!-- SHOW LIST OF SUBMITTED WORDS -->
+<ul class="words">
+</ul>
+
+</section>
+
+{% endblock %}
